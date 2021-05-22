@@ -155,27 +155,32 @@
 
 
   // We create the street view tile layer that will be the default background of our map.
-// let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        accessToken: API_KEY
+ });
+
+   // We create the satellitestreet view tile layer that will be the default background of our map.
+   let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        accessToken: API_KEY
+ });
+
+ // We create the light view tile layer that will be the default background of our map.
+// let light = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+// attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
 //     maxZoom: 18,
-//     id: 'mapbox/streets-v11',
-//     tileSize: 512,
-//     zoomOffset: -1,
 //     accessToken: API_KEY
 // });
- // We create the light view tile layer that will be the default background of our map.
-let light = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    accessToken: API_KEY
-});
 
-// We create the dark view tile layer that will be the default background of our map.
-let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    accessToken: API_KEY
-});
+// // We create the dark view tile layer that will be the default background of our map.
+// let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+// attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
+//     maxZoom: 18,
+//     accessToken: API_KEY
+// });
 
 // // Create a base layer that holds both maps.
 // let baseMaps = {
@@ -183,10 +188,15 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 //   Dark: dark
 // };
 
+// // Create a base layer that holds both maps.
+// let baseMaps = {
+//   Light: light,
+//   Dark: dark
+// };
 // Create a base layer that holds both maps.
 let baseMaps = {
-  Light: light,
-  Dark: dark
+  "Streets": streets,
+  "Satellite Streets": satelliteStreets
 };
 
 // Create the map object with a center and zoom level.
@@ -204,10 +214,17 @@ let baseMaps = {
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-  center: [44.0, -80.0],
-  zoom: 2,
-  layers: [light]
+  center: [44.0, -79.3],
+  zoom: 11,
+  layers: [satelliteStreets]
 });
+
+// // Create the map object with center, zoom level and default layer.
+// let map = L.map('mapid', {
+//   center: [43.7, -79.3],
+//   zoom: 2,
+//   layers: [light]
+// });
 
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
@@ -216,7 +233,10 @@ L.control.layers(baseMaps).addTo(map);
 // let airportData = "https://raw.githubusercontent.com/hira-ayub/Mapping_Earthquakes/main/majorAirports.json";
 
 // Accessing the Toronto airline routes GeoJSON URL.
-let torontoData = "https://raw.githubusercontent.com/hira-ayub/Mapping_Earthquakes/main/torontoRoutes.json";
+// let torontoData = "https://raw.githubusercontent.com/hira-ayub/Mapping_Earthquakes/main/torontoRoutes.json";
+
+// Accessing the Toronto neighborhoods GeoJSON URL.
+let torontoHoods = "https://raw.githubusercontent.com/hira-ayub/Mapping_Earthquakes/main/torontoNeighborhoods.json";
 
 // Grabbing our GeoJSON data.
 // d3.json(airportData).then(function(data) {
@@ -235,21 +255,43 @@ let torontoData = "https://raw.githubusercontent.com/hira-ayub/Mapping_Earthquak
 
 // });
 
-// Create a style for the lines.
-let mystyle = {
-	color: "#ffffa1", // yellow
-	weight: 2
+// // Create a style for the lines.
+// let mystyle = {
+// 	color: "#ffffa1", // yellow
+// 	weight: 2
+// }
+
+// // Create a style for the lines. (Skill drill)
+let myStyle = {
+	color: "blue",
+	weight: 1,
+fillColor: "yellow",
+fillOpacity: 0.2
 }
 
 // Grabbing our GeoJSON data.
-d3.json(torontoData).then(function(data) {
-  console.log(data);
+// d3.json(torontoData).then(function(data) {
+//   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
-L.geoJson(data, {
-  style: mystyle,
-  onEachFeature: function(feature, layer) {
-    layer.bindPopup("<h3>Airline: " + feature.properties.airline + "</h3> <hr> <h3>Destination: " 
-    + feature.properties.dst + "</h3>");
-  }
-}).addTo(map);
+// L.geoJson(data, {
+//   style: mystyle,
+//   onEachFeature: function(feature, layer) {
+//     layer.bindPopup("<h3>Airline: " + feature.properties.airline + "</h3> <hr> <h3>Destination: " 
+//     + feature.properties.dst + "</h3>");
+//   }
+// }).addTo(map);
+// });
+
+// Grabbing our GeoJSON data.
+d3.json(torontoHoods).then(function(data) {
+  console.log(data);
+
+  //Creating a GeoJSON layer with the retrieved data.
+  L.geoJson(data, {
+    style: myStyle,
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup("<h3>Neighborhood: " + feature.properties.AREA_NAME +  "</h3>");
+  },
+})	
+.addTo(map);
 });
