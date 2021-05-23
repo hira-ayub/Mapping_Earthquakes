@@ -13,12 +13,16 @@ We displayed the Major Earthquakes and Eathquakes with Tectonic plates and in th
 
 ## Street View
 
-![Street_View](static/Resources/Streets.png)
+![Street_View](Earthquake_Challenge/static/Resources/Streets.png)
 
 ## Satlellite View
 
-![Satellite_View](static/Resources/Satellite.png)
+![Satellite_View](Earthquake_Challenge/static/Resources/Satellite.png)
 
 ## Dark View
 
-![Dark_View](static/Resources/Dark.png)
+![Dark_View](Earthquake_Challenge/static/Resources/Dark.png)
+
+# Visualizing Earthquke Data
+
+https://hira-ayub.github.io/Mapping_Earthquakes/
