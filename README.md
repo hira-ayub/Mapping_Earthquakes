@@ -25,4 +25,4 @@ We displayed the Major Earthquakes and Eathquakes with Tectonic plates and in th
 
 # Visualizing Earthquke Data
 
-https://hira-ayub.github.io/Mapping_Earthquakes/
+https://hira-ayub.github.io/Mapping_Earthquakes/index.html
