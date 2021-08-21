@@ -23,6 +23,4 @@ We displayed the Major Earthquakes and Eathquakes with Tectonic plates and in th
 
 ![Dark_View](Earthquake_Challenge/static/Resources/Dark.png)
 
-# Visualizing Earthquke Data
 
-https://hira-ayub.github.io/Mapping_Earthquakes/index.html
